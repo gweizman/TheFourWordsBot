@@ -18,3 +18,11 @@ var/
 
 # Serverless directories
 .serverless
+
+# IDE
+.vscode
+
+# Caches
+__pycache__
+.hypothesis
+.pytest_cache

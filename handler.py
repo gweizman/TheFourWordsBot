@@ -12,17 +12,21 @@ TOKEN = os.environ['TELEGRAM_TOKEN']
 BASE_URL = "https://api.telegram.org/bot{}".format(TOKEN)
 
 
+def get_response(message):
+    if "גרביל" in message:
+        return "זה לא ארבע גרביל"
+    elif len(re.findall(r"[^\s_]+", message)) != 4:
+        return "זה לא ארבע מילים"
+    return None
+
+
 def handle_message(event, context):
     try:
         data = json.loads(event["body"])
         message = str(data["message"]["text"])
         message_id = str(data["message"]["message_id"])
         chat_id = data["message"]["chat"]["id"]
-        response = None
-        if "גרביל" in message:
-            response = "זה לא ארבע גרביל"
-        elif len(re.split(' |_', message)) != 4:
-            response = "זה לא ארבע מילים"
+        response = get_response(message)
         if response:
             data = {
                 "text": response.encode("utf8"),

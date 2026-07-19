@@ -1,0 +1,14 @@
+{
+  "name": "the-four-words-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "fast-check": "^4",
+    "vitest": "^3",
+    "wrangler": "^4"
+  }
+}

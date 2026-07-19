@@ -25,7 +25,7 @@ export default {
       const message = String(data.message.text);
       const response = getResponse(message);
       if (response) {
-        await fetch(
+        const tgResponse = await fetch(
           `https://api.telegram.org/bot${env.TELEGRAM_TOKEN}/sendMessage`,
           {
             method: "POST",
@@ -37,6 +37,13 @@ export default {
             }),
           }
         );
+        if (!tgResponse.ok) {
+          console.log(
+            "sendMessage failed:",
+            tgResponse.status,
+            await tgResponse.text()
+          );
+        }
       }
     } catch (e) {
       console.log(e);
